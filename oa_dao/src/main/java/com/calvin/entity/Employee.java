@@ -4,7 +4,7 @@ package com.calvin.entity;
  * @author Calvin
  * @Description:
  */
-public class Department {
+public class Employee {
     private String sn;
     private String password;
     private String name;
