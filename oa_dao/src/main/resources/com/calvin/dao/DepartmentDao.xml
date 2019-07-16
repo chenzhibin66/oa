@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.calvin.dao.DepartmentDao">
+
+    <resultMap id="department" type="Department">
+        <id column="sn" property="sn" javaType="String"/>
+        <result column="name" property="name" javaType="String"/>
+        <result column="address" property="address" javaType="String"/>
+    </resultMap>
+    <insert id="insert" parameterType="Department">
+        insert into department values (#{sn,jdbcType=VARCHAR} ,#{name,jdbcType=VARCHAR} ,#{address,jdbcType=VARCHAR} );
+    </insert>
+
+    <update id="update" parameterType="Department">
+        update department set name=#{name,jdbcType=VARCHAR} ,address=#{address,jdbcType=VARCHAR}
+        where sn=#{sn,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        delete from department where sn=#{sn,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="select" parameterType="String" resultMap="department">
+        select * from department where sn=#{sn,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAll" resultMap="department">
+        select * from department
+    </select>
+
+</mapper>
