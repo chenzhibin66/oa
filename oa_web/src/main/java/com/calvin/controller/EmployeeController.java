@@ -31,7 +31,7 @@ public class EmployeeController {
 
     @RequestMapping("/to_add")
     public String toAdd(Map<String, Object> map) {
-        map.put("department", new Employee());
+        map.put("employee", new Employee());
         map.put("dlist", departmentBiz.getAll());
         map.put("plist", Contant.getPost());
         return "employee_add";

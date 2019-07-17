@@ -37,7 +37,7 @@
     </select>
 
     <select id="selectAll" resultMap="employee">
-        select * from employee
+         select e.*,d.sn dsn,d.name dname from employee e left join department d on d.sn=e.department_sn
     </select>
 
 </mapper>
