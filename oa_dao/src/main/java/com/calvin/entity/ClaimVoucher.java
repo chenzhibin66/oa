@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * @author Calvin
- * @Description:
+ * @Description:1.编号 2事由 3创建者 4创建时间 5处理人 6总金额 7状态
  */
 public class ClaimVoucher {
     private Integer id;
@@ -17,7 +17,8 @@ public class ClaimVoucher {
     private String nextDealSn;
     private Double totalAmount;
     private String status;
-
+    private Employee creater;
+    private Employee dealer;
 
     public Integer getId() {
         return id;
@@ -73,5 +74,21 @@ public class ClaimVoucher {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Employee getCreater() {
+        return creater;
+    }
+
+    public void setCreater(Employee creater) {
+        this.creater = creater;
+    }
+
+    public Employee getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Employee dealer) {
+        this.dealer = dealer;
     }
 }
