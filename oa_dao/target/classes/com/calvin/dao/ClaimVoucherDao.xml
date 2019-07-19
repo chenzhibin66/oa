@@ -56,7 +56,7 @@
     </select>
 
     <select id="selectByNextDealSn" resultMap="claimVoucher" parameterType="String">
-        select cv.*,ce.name cname,ce.post cpost,d.name dname,d.post,dpost
+        select cv.*,ce.name cname,ce.post cpost,d.name dname,d.post dpost
         from claim_voucher cv
         left join employee ce on ce.sn=cv.create_sn
         left join employee d on ce.sn=cv.next_deal_sn

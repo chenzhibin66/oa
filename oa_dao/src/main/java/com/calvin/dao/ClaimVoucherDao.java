@@ -48,5 +48,4 @@ public interface ClaimVoucherDao {
      */
     List<ClaimVoucher> selectByNextDealSn(String ndsn);
 
-
 }

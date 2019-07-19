@@ -18,8 +18,7 @@
     </insert>
 
     <update id="update" parameterType="ClaimVoucherItem">
-        update claim_voucher_item set claim_voucher_id=#{claimVoucherId,jdbcType=INTEGER},#{item,jdbcType=VARCHAR} ,
-        #{amount,jdbcType=DOUBLE} ,#{comment,jdbcType=VARCHAR}
+         update  claim_voucher_item set claim_voucher_id=#{claimVoucherId,jdbcType=INTEGER} ,item=#{item,jdbcType=VARCHAR} ,amount=#{amount,jdbcType=DOUBLE} ,comment=#{comment,jdbcType=VARCHAR}
         where id=#{id,jdbcType=INTEGER}
     </update>
 
