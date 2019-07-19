@@ -2,6 +2,7 @@ package com.calvin.controller;
 
 import com.calvin.biz.ClaimVoucherBiz;
 import com.calvin.dto.ClaimVoucherInfo;
+import com.calvin.entity.DealRecord;
 import com.calvin.entity.Employee;
 import com.calvin.global.Contant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,5 +82,24 @@ public class ClaimVoucherController {
     public String submit(int id) {
         claimVoucherBiz.submit(id);
         return "claim_voucher_deal";
+    }
+
+    @RequestMapping("/to_check")
+    public String toCheck(int id, Map<String, Object> map) {
+        map.put("claimVoucher", claimVoucherBiz.get(id));
+        map.put("items", claimVoucherBiz.getItems(id));
+        map.put("records", claimVoucherBiz.getRecords(id));
+        DealRecord dealRecord=new DealRecord();
+        dealRecord.setClaimVoucherId(id);
+        map.put("record", dealRecord);
+        return "claim_voucher_check";
+    }
+
+    @RequestMapping("/check")
+    public String check(HttpSession session, DealRecord dealRecord) {
+        Employee employee = (Employee) session.getAttribute("employee");
+        dealRecord.setDealSn(employee.getSn());
+        claimVoucherBiz.deal(dealRecord);
+        return "redirect:deal";
     }
 }

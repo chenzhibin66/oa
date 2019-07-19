@@ -22,17 +22,12 @@ import java.util.List;
  */
 @Service("claimVoucherBiz")
 public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
-
-
     @Autowired
     private ClaimVoucherDao claimVoucherDao;
-
     @Autowired
     private ClaimVoucherItemDao claimVoucherItemDao;
-
     @Autowired
     private DealRecordDao dealRecordDao;
-
     @Autowired
     private EmployeeDao employeeDao;
 
@@ -99,6 +94,7 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
     public void submit(int id) {
         ClaimVoucher claimVoucher = claimVoucherDao.select(id);
         Employee employee = employeeDao.select(claimVoucher.getCreateSn());
+
         claimVoucher.setStatus(Contant.CLAIMVOUCHER_SUBMIT);
         claimVoucher.setNextDealSn(employeeDao.selectByDepartmentAndPost(employee.getDepartmentSn(), Contant.POST_FM).get(0).getSn());
         claimVoucherDao.update(claimVoucher);
@@ -116,38 +112,37 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
     public void deal(DealRecord dealRecord) {
         ClaimVoucher claimVoucher = claimVoucherDao.select(dealRecord.getClaimVoucherId());
         Employee employee = employeeDao.select(dealRecord.getDealSn());
+        dealRecord.setDealTime(new Date());
+
         if (dealRecord.getDealWay().equals(Contant.DEAL_PASS)) {
             if (claimVoucher.getTotalAmount() <= Contant.LIMIT_CHECK || employee.getPost().equals(Contant.POST_GM)) {
                 claimVoucher.setStatus(Contant.CLAIMVOUCHER_APPROVED);
                 claimVoucher.setNextDealSn(employeeDao.selectByDepartmentAndPost(null, Contant.POST_CASHIER).get(0).getSn());
-                dealRecord.setDealTime(new Date());
+
                 dealRecord.setDealResult(Contant.CLAIMVOUCHER_APPROVED);
             } else {
                 claimVoucher.setStatus(Contant.CLAIMVOUCHER_RECHECK);
                 claimVoucher.setNextDealSn(employeeDao.selectByDepartmentAndPost(null, Contant.POST_GM).get(0).getSn());
 
-                dealRecord.setDealTime(new Date());
                 dealRecord.setDealResult(Contant.CLAIMVOUCHER_RECHECK);
             }
         } else if (dealRecord.getDealWay().equals(Contant.DEAL_BACK)) {
             claimVoucher.setStatus(Contant.CLAIMVOUCHER_BACK);
             claimVoucher.setNextDealSn(claimVoucher.getCreateSn());
 
-            dealRecord.setDealTime(new Date());
             dealRecord.setDealResult(Contant.CLAIMVOUCHER_BACK);
         } else if (dealRecord.getDealWay().equals(Contant.DEAL_REJECT)) {
             claimVoucher.setStatus(Contant.CLAIMVOUCHER_TERMINATED);
             claimVoucher.setNextDealSn(null);
 
-            dealRecord.setDealTime(new Date());
             dealRecord.setDealResult(Contant.CLAIMVOUCHER_TERMINATED);
-        }else if (dealRecord.getDealWay().equals(Contant.DEAL_PAID)) {
+        } else if (dealRecord.getDealWay().equals(Contant.DEAL_PAID)) {
             claimVoucher.setStatus(Contant.CLAIMVOUCHER_PAID);
             claimVoucher.setNextDealSn(null);
 
-            dealRecord.setDealTime(new Date());
             dealRecord.setDealResult(Contant.CLAIMVOUCHER_PAID);
         }
+
         claimVoucherDao.update(claimVoucher);
         dealRecordDao.insert(dealRecord);
     }

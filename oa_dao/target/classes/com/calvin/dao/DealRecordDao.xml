@@ -5,9 +5,9 @@
 <mapper namespace="com.calvin.dao.DealRecordDao">
 <resultMap id="deal_record" type="DealRecord">
     <id column="id" property="id" javaType="java.lang.Integer"/>
-    <result column="claim_voucher_id" property="claimVoucherId" javaType="String"/>
+    <result column="claim_voucher_id" property="claimVoucherId" javaType="java.lang.Integer"/>
     <result column="deal_sn" property="dealSn" javaType="String"/>
-    <result column="deal_time" property="dealTime" javaType="String"/>
+    <result column="deal_time" property="dealTime" javaType="java.util.Date"/>
     <result column="deal_way" property="dealWay" javaType="String"/>
     <result column="deal_result" property="dealResult" javaType="String"/>
     <result column="comment" property="comment" javaType="String"/>
@@ -27,7 +27,7 @@
     <select id="selectByClaimVoucher" resultMap="deal_record">
         select d.*,e.name ename,e.post epost from deal_record d
         left join employee e on d.deal_sn=e.sn
-        where d.claim_voucher_id=#{cvid} order by d.deal_time
+        where d.claim_voucher_id=#{cvid}   order by d.deal_time
     </select>
 
 </mapper>
