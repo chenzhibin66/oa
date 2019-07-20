@@ -72,7 +72,7 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
         for (ClaimVoucherItem old : olds) {
             boolean isHave = false;
             for (ClaimVoucherItem item : items) {
-                if (item.getId().equals(old.getId())) {
+                if (item.getId() == old.getId()) {
                     isHave = true;
                     break;
                 }
@@ -89,6 +89,7 @@ public class ClaimVoucherBizImpl implements ClaimVoucherBiz {
                 claimVoucherItemDao.insert(item);
             }
         }
+
     }
 
     public void submit(int id) {
