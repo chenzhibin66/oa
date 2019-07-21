@@ -46,5 +46,11 @@ public interface EmployeeDao {
      */
     List<Employee> selectAll();
 
+    /**
+     * 根据部门跟职务获得员工
+     * @param dsn
+     * @param post
+     * @return
+     */
     List<Employee> selectByDepartmentAndPost(@Param("dsn") String dsn, @Param("post") String post);
 }

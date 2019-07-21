@@ -61,6 +61,10 @@ public interface ClaimVoucherBiz {
 
     void update(ClaimVoucher claimVoucher, List<ClaimVoucherItem> items);
 
+    /**
+     * 提交报销单
+     * @param id
+     */
     void submit(int id);
 
     void deal(DealRecord dealRecord);

@@ -8,7 +8,7 @@
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
 
-    <title> 欢迎使用OA系统 </title>
+    <title>欢迎使用OA系统 </title>
 
     <link rel="stylesheet" type="text/css" href="/assets/skin/default_skin/css/theme.css">
     <link rel="stylesheet" type="text/css" href="/assets/admin-tools/admin-forms/css/admin-forms.css">
@@ -20,7 +20,7 @@
     <header class="navbar navbar-fixed-top navbar-shadow">
         <div class="navbar-branding">
             <a class="navbar-brand" href="dashboard.html">
-                <b>OA</b>系统
+                <b>OA</b>
             </a>
             <span id="toggle_sidemenu_l" class="ad ad-lines"></span>
         </div>
@@ -141,4 +141,5 @@
             </div>
         </div>
     </aside>
-    <section id="content_wrapper">
+    <section id="content_wrapper"/>
+</div>
